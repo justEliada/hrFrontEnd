@@ -20,34 +20,35 @@ const routes: Routes = [
     path: 'signup',
     component: SignupComponent,
   },
-  { 
+  {
     path: 'dashboard',
     component: DashboardComponent,
     canActivate: [AuthGuard, RoleGuard],
-    data: { expectedRole: 'manager' } 
+    data: { expectedRole: 'manager' }
   },
-  { 
+  {
     path: 'edit-user',
     component: EditUserComponent,
     canActivate: [AuthGuard, RoleGuard],
-    data: { expectedRole: 'manager' } 
+    data: { expectedRole: 'manager' }
   },
-  { path: 'edit-user/:id', component: EditUserComponent, 
-  canActivate: [AuthGuard, RoleGuard],
-    data: { expectedRole: 'manager' } 
+  {
+    path: 'edit-user/:id', component: EditUserComponent,
+    canActivate: [AuthGuard, RoleGuard],
+    data: { expectedRole: 'manager' }
   },
-  { 
+  {
     path: 'user-dashboard',
     component: UserDashboardComponent,
     canActivate: [AuthGuard, RoleGuard],
-    data: { expectedRole: 'user' } 
+    data: { expectedRole: 'user' }
   },
-  { 
+  {
     path: 'vacations-list', component: VacationsListComponent,
     canActivate: [AuthGuard, RoleGuard],
-    data: { expectedRole: 'user'} 
+    data: { expectedRole: 'user' }
   },
-  { 
+  {
     path: '**',
     component: NotfoundComponent
   }

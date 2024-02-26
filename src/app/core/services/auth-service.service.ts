@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, catchError, map, throwError } from 'rxjs';
+import { BehaviorSubject, Observable, catchError, map, throwError } from 'rxjs';
 import { User } from '../models/user.model';
 
 @Injectable({
@@ -8,6 +8,10 @@ import { User } from '../models/user.model';
 })
 export class AuthServiceService {
   private baseUrl = 'http://localhost:8080/auth/user';
+
+  private authStatusSource = new BehaviorSubject<boolean>(this.isAuthenticated());
+
+  authStatus$ = this.authStatusSource.asObservable();
 
   constructor(private http: HttpClient) { }
 
@@ -63,6 +67,7 @@ export class AuthServiceService {
       localStorage.removeItem('isAuthenticated');
       localStorage.removeItem('currentUser');
     }
+    this.authStatusSource.next(value);
   }
 
   isAuthenticated(): boolean {
@@ -72,6 +77,7 @@ export class AuthServiceService {
   logout(): void {
     localStorage.removeItem('currentUser');
     localStorage.removeItem('isAuthenticated');
+    this.authStatusSource.next(false);
   }
 
   hasRole(expectedRole: string): boolean {

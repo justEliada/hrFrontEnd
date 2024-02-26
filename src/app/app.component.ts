@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { Router, Event as RouterEvent, NavigationEnd } from '@angular/router';
-import { filter } from 'rxjs/operators';
+import { AuthServiceService } from './core/services/auth-service.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -9,21 +9,18 @@ import { filter } from 'rxjs/operators';
 })
 export class AppComponent {
   title = 'hrAngularProject';
-  showTopAndSideBar = true;
-  searchText = ''; 
-  
-  onSearch(text: string): void {
-    console.log('Search text received in AppComponent:', text); 
-    this.searchText = text;
-  }
-  
+  isAuthenticated: boolean = false;
+  private authSubscription: Subscription;
 
-  constructor(private router: Router) {
-    this.router.events.pipe(
-      filter((event: RouterEvent): event is NavigationEnd => event instanceof NavigationEnd)
-    ).subscribe((event: NavigationEnd) => {
-      const pathsWithoutBars = ['/', '/login', '/signup', '/**'];
-      this.showTopAndSideBar = !pathsWithoutBars.includes(event.urlAfterRedirects);
+  constructor(private authService: AuthServiceService) {
+    this.authSubscription = this.authService.authStatus$.subscribe(isAuthenticated => {
+      this.isAuthenticated = isAuthenticated;
     });
+  }
+
+  ngOnDestroy() {
+    if (this.authSubscription) {
+      this.authSubscription.unsubscribe();
+    }
   }
 }

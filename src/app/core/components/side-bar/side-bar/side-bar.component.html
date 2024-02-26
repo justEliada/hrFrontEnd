@@ -1,0 +1,20 @@
+<aside class="sidebar">
+  <div class="user-info">
+    <h3>{{ userName }}</h3>
+    <p>Welcome back!</p>
+  </div>
+  <nav class="nav-menu">
+    <a href="#" class="nav-item active" (click)="navigateToDashboard()">
+      <i class="fa fa-tachometer-alt"></i>
+      <span>Dashboard</span>
+    </a>
+    <a href="#" *ngIf="userRole !== 'MANAGER'" class="nav-item" routerLink="/vacations-list">
+      <i class="fa fa-users"></i>
+      <span>Vacations</span>
+    </a>
+    <a href="#" class="nav-item" (click)="logout()">
+      <i class="fa fa-users"></i>
+      <span>Logout</span>
+    </a>
+  </nav>
+</aside>

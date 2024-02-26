@@ -1,7 +1,10 @@
 import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ExtendedUserResponseDto } from 'src/app/core/models/ExtendedUserResponseDto.model';
 import { UserResponseDto } from 'src/app/core/models/userResponse.model';
 import { UserService } from 'src/app/modules/services/user.service';
+import { VacationRequestService } from 'src/app/modules/services/vacation-request.service';
+
 
 @Component({
   selector: 'app-dashboard',
@@ -11,14 +14,15 @@ import { UserService } from 'src/app/modules/services/user.service';
 })
 export class DashboardComponent implements OnInit {
   isFilterApplied = false;
-  users: UserResponseDto[] = [];
-  allUsers: UserResponseDto[] = [];
+  users: ExtendedUserResponseDto[] = [];
+  allUsers: ExtendedUserResponseDto[] = [];
 
   @Input() searchText: string = '';
   constructor(
     private userService: UserService,
     private router: Router,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute,
+    private vacationRequestService: VacationRequestService, ) { }
 
   ngOnInit(): void {
     this.loadAllUsers();
@@ -34,8 +38,12 @@ export class DashboardComponent implements OnInit {
   loadAllUsers(): void {
     this.userService.getAllUsers().subscribe({
       next: (data) => {
-        this.allUsers = data.filter(user => user.id !== 1);
+        this.allUsers = data.filter(user => user.id !== 1).map(user => ({
+          ...user,
+          hasPendingVacation: false 
+        }));
         this.users = [...this.allUsers];
+        this.checkForPendingVacations();
       },
       error: (e) => console.error(e)
     });
@@ -77,7 +85,12 @@ export class DashboardComponent implements OnInit {
     } else {
       this.userService.getUsersByLeastCreatedTimeSheet().subscribe({
         next: (filteredUsers) => {
-          this.users = filteredUsers;
+          const usersWithPendingCheck = filteredUsers.map(user => ({
+            ...user,
+            hasPendingVacation: false 
+          }));
+          this.users = usersWithPendingCheck;
+          this.checkForPendingVacations(usersWithPendingCheck);
           this.isFilterApplied = true;
         },
         error: (e) => console.error(e)
@@ -85,7 +98,21 @@ export class DashboardComponent implements OnInit {
     }
   }
 
-
+  checkForPendingVacations(usersToCheck: ExtendedUserResponseDto[] = this.users): void {
+    usersToCheck.forEach((user, index) => {
+      this.vacationRequestService.getAllVacationRequestsById(user.id).subscribe({
+        next: (requests) => {
+          const hasPending = requests.some((request: { status: string; }) => request.status === 'PENDING');
+          const userIndex = this.users.findIndex(u => u.id === user.id);
+          if (userIndex !== -1) {
+            this.users[userIndex] = { ...this.users[userIndex], hasPendingVacation: hasPending };
+          }
+        },
+        error: (e) => console.error('Error fetching vacation requests for user', user.id, e)
+      });
+    });
+  }
+  
   deleteUser(id: number): void {
     if (confirm('Are you sure you want to delete this user?')) {
       this.userService.deleteUser(id).subscribe({

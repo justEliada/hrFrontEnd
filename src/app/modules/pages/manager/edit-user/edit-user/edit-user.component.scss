@@ -1,4 +1,3 @@
-
 .vacation-request-form {
   display: flex;
   flex-direction: column;
@@ -88,7 +87,7 @@
 
   .user-request-note {
     margin: 30px;
-    .vacation-entry {
+      .vacation-entry {
       background: #fff;
       border-radius: 8px;
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -209,7 +208,7 @@
   border-radius: 0.5rem;
   margin: 20px 0;
   background-color: #A3D2CA;
-
+  
   button{
       margin: 0 10px;
       padding: 10px 20px;
@@ -220,3 +219,4 @@
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   }
 }
+

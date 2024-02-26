@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter, Input, Output } from '@angular/core';
+import { Component, OnInit, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { UserService } from 'src/app/modules/services/user.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -7,6 +7,7 @@ import { VacationRequest } from 'src/app/core/models/vacationRequest.model';
 import { ToastService } from 'src/app/core/services/toast.service';
 import { VacationRequestService } from 'src/app/modules/services/vacation-request.service';
 import { VacationResponse } from 'src/app/core/models/VacationResponse.model';
+import { CalendarModalComponent } from 'src/app/modules/components/calendar-modal/calendar-modal/calendar-modal.component';
 
 @Component({
   selector: 'app-edit-user',
@@ -20,6 +21,7 @@ export class EditUserComponent implements OnInit {
   userRequestNotes: VacationResponse[] = [];
   showModal: boolean = false;
   selectedUserDaysOff: number | undefined;
+  showCalendar: boolean = false;
 
   vacationRequest: VacationRequest = {
     fromDate: new Date(),
@@ -45,9 +47,14 @@ export class EditUserComponent implements OnInit {
     });
   }
 
+ 
   ngOnInit() {
     this.getUser();
     this.getUserVacationRequest();
+  }
+  
+  handleShowChange(show: boolean) {
+    this.showCalendar = show;
   }
 
   openModal() {

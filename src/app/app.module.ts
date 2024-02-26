@@ -27,6 +27,7 @@ import { ToastComponent } from './modules/components/toast/toast.component';
 import { ModalComponent } from './modules/components/modal/modal.component';
 import { VacationsListComponent } from './modules/pages/user/dashboard/vacations-list/vacations-list.component';
 import { MatBadgeModule } from '@angular/material/badge';
+import { CalendarModalComponent } from './modules/components/calendar-modal/calendar-modal/calendar-modal.component';
 
 
 
@@ -45,8 +46,8 @@ import { MatBadgeModule } from '@angular/material/badge';
     UserDashboardComponent,
     ToastComponent,
     ModalComponent,
-    VacationsListComponent
-   
+    VacationsListComponent,
+    CalendarModalComponent
   ],
   imports: [
     BrowserModule,

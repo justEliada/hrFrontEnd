@@ -4,17 +4,17 @@
     <p>Welcome back!</p>
   </div>
   <nav class="nav-menu">
-    <a href="#" class="nav-item active" (click)="navigateToDashboard()">
+    <button  class="nav-item active" (click)="navigateToDashboard()">
       <i class="fa fa-tachometer-alt"></i>
       <span>Dashboard</span>
-    </a>
-    <a href="#" *ngIf="userRole !== 'MANAGER'" class="nav-item" routerLink="/vacations-list">
+    </button>
+    <button *ngIf="userRole !== 'MANAGER'" class="nav-item" (click)="navigateToVacationList()">
       <i class="fa fa-users"></i>
       <span>Vacations</span>
-    </a>
-    <a href="#" class="nav-item" (click)="logout()">
+    </button>
+    <button class="nav-item" (click)="logout()">
       <i class="fa fa-users"></i>
       <span>Logout</span>
-    </a>
+    </button>
   </nav>
 </aside>

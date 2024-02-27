@@ -13,7 +13,7 @@ export class RoleGuard implements CanActivate {
     const userRole = this.authService.getCurrentUserRole()?.toUpperCase();
     const roles = route.data['roles'] ? route.data['roles'].map((role: string) => role.toUpperCase()) : [];
   
-    if (roles.length > 0 && roles.indexOf(userRole) === -1) {
+    if (route.data['role'] && route.data['role'].indexOf(userRole) === -1) {
       if (userRole === 'MANAGER') {
         this.router.navigate(['/dashboard']);
       } else if (userRole === 'USER') {
@@ -21,7 +21,6 @@ export class RoleGuard implements CanActivate {
       }
       return false;
     }
-  
     return true;
   }
   

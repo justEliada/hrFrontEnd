@@ -5,16 +5,15 @@ import { SignupComponent } from './modules/pages/authentication/signup/signup/si
 import { NotfoundComponent } from './core/components/page-not-found/notfound/notfound.component';
 import { DashboardComponent } from './modules/pages/manager/dashboard/dashboard.component';
 import { EditUserComponent } from './modules/pages/manager/edit-user/edit-user/edit-user.component';
-import { CalendarComponent } from './modules/components/calendar/calendar/calendar.component';
-import { UserDashboardComponent } from './modules/pages/user/dashboard/user-dashboard/user-dashboard.component';
-import { VacationsListComponent } from './modules/pages/user/dashboard/vacations-list/vacations-list.component';
 import { RoleGuard } from './core/guards/role-guard.guard';
 import { AuthGuard } from './core/guards/auth-guard.guard';
+import { LoginGuard } from './core/guards/login-guard.guard';
 
 const routes: Routes = [
   {
     path: '',
-    component: LoginComponent
+    component: LoginComponent,
+    canActivate: [LoginGuard]
   },
   {
     path: 'signup',
@@ -24,36 +23,30 @@ const routes: Routes = [
     path: 'dashboard',
     component: DashboardComponent,
     canActivate: [AuthGuard, RoleGuard],
-    data: { expectedRole: 'manager' }
+    data: { role: 'MANAGER' }
   },
   {
     path: 'edit-user',
     component: EditUserComponent,
     canActivate: [AuthGuard, RoleGuard],
-    data: { expectedRole: 'manager' }
+    data: { role: 'MANAGER' }
   },
   {
     path: 'edit-user/:id', component: EditUserComponent,
     canActivate: [AuthGuard, RoleGuard],
-    data: { expectedRole: 'manager' }
+    data: { role: 'MANAGER' }
   },
-  {
-    path: 'user-dashboard',
-    component: UserDashboardComponent,
+  
+  { path: 'user-dashboard', 
+    loadChildren: () => import('./modules/pages/user/user.module').then(m => m.UserModule), 
     canActivate: [AuthGuard, RoleGuard],
-    data: { expectedRole: 'user' }
-  },
-  {
-    path: 'vacations-list', component: VacationsListComponent,
-    canActivate: [AuthGuard, RoleGuard],
-    data: { expectedRole: 'user' }
-  },
+    data: { role: 'USER' }
+   },
   {
     path: '**',
     component: NotfoundComponent
   }
 ];
-
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

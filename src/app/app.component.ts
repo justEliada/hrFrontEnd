@@ -17,6 +17,7 @@ export class AppComponent {
       this.isAuthenticated = isAuthenticated;
     });
   }
+  
 
   ngOnDestroy() {
     if (this.authSubscription) {

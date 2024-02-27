@@ -102,6 +102,7 @@ export class EditUserComponent implements OnInit {
   }
   
 
+          
   saveChanges() {
     if (this.editForm.valid) {
       const updatedUser: UserResponseDto = {
@@ -109,8 +110,10 @@ export class EditUserComponent implements OnInit {
         ...this.editForm.value,
       };
       this.userService.editUser(updatedUser).subscribe({
-        next: () => {
-          console.log('User updated successfully');
+        next: (response) => {
+          this.toastService.show(
+            'User Data Saved Successfully'
+          );
           this.router.navigate(['/dashboard']);
         },
         error: (e) => {

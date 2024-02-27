@@ -12,15 +12,17 @@ import { ToastComponent } from './modules/components/toast/toast.component';
 import { ModalComponent } from './modules/components/modal/modal.component';
 import { CalendarModalComponent } from './modules/components/calendar-modal/calendar-modal/calendar-modal.component';
 import { MatBadgeModule } from '@angular/material/badge';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatListModule } from '@angular/material/list';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   declarations: [
-    LoginComponent,
-    SignupComponent,
-    DashboardComponent,
     TopBarComponent,
     SideBarComponent,
-    EditUserComponent,
     CalendarComponent,
     ToastComponent,
     ModalComponent,
@@ -32,6 +34,12 @@ import { MatBadgeModule } from '@angular/material/badge';
     FormsModule, 
     ReactiveFormsModule, 
     MatBadgeModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatIconModule,
+    MatSidenavModule,
+    MatListModule,
+    MatInputModule,
   ],
   exports: [
     CommonModule,
@@ -39,12 +47,8 @@ import { MatBadgeModule } from '@angular/material/badge';
     ReactiveFormsModule,
     TopBarComponent,
     CalendarComponent,
-    LoginComponent,
-    SignupComponent,
-    DashboardComponent,
     TopBarComponent,
     SideBarComponent,
-    EditUserComponent,
     CalendarComponent,
     ToastComponent,
     ModalComponent,

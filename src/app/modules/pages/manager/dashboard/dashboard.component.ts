@@ -55,7 +55,7 @@ export class DashboardComponent implements OnInit {
 
   editUser(userId: number): void {
     console.log(`Navigating to edit user with ID: ${userId}`);
-    this.router.navigate(['/edit-user', userId]).catch(err => console.error('Navigation error:', err));
+    this.router.navigate(['/dashboard/edit-user', userId]).catch(err => console.error('Navigation error:', err));
   }
   
   filterUsers(text: string): void {

@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthServiceService } from 'src/app/core/services/auth-service.service';
+import { ToastService } from 'src/app/core/services/toast.service';
 
 @Component({
   selector: 'app-signup',
@@ -15,7 +16,9 @@ export class SignupComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder, 
     private router: Router, 
-    private authService: AuthServiceService) { }
+    private authService: AuthServiceService,
+    private toastService:ToastService
+    ) {}
 
   ngOnInit(): void {
     this.signupForm = this.formBuilder.group({
@@ -32,16 +35,15 @@ export class SignupComponent implements OnInit {
       this.authService.signup(this.signupForm.value).subscribe({
         next: (response) => {
           console.log('Signup successful', response);
-          this.router.navigate(['/']);
+          this.router.navigate(['']);
         },
-        error: (error: HttpErrorResponse) => {
-          console.error('Signup failed', error);
-          if (error.status === 400) {
-            const errorResponse = error.error;
-            if (typeof errorResponse === 'string' && errorResponse.includes('User already exists')) {
-              this.signupForm.get('username')!.setErrors({ usernameTaken: true });            }
-          }
-        }
+        error: (error) => {
+          console.log('Signup error', error);
+          this.toastService.show(
+            `${error || 'Error submitting signup request'}`,
+            'error'
+          );
+        },
       });
     } else {
       console.log('Form is not valid');

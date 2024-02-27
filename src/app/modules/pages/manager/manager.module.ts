@@ -1,21 +1,51 @@
-// import { NgModule } from '@angular/core';
-// import { CommonModule } from '@angular/common';
-// import { DashboardComponent } from './dashboard/dashboard.component';
-// import { MatBadgeModule } from '@angular/material/badge';
-// import { SharedModule } from 'src/app/shared.module';
-// // Import other necessary modules
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { RouterModule, Routes } from '@angular/router'; 
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { SharedModule } from 'src/app/shared.module';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { EditUserComponent } from './edit-user/edit-user/edit-user.component';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatListModule } from '@angular/material/list';
+import { MatInputModule } from '@angular/material/input';
+import { MatBadgeModule } from '@angular/material/badge';
 
-// @NgModule({
-//   declarations: [
-//     DashboardComponent,
-//     // Other components belonging to this module
-//   ],
-//   imports: [
-//     CommonModule,
- 
-//     SharedModule,// Ensure MatBadgeModule is imported here
-//     // Other Angular Material modules and any other modules needed
-//   ],
-//   // exports, providers, etc.
-// })
-// export class ManagerModule { } // This name is just an example, replace with the actual module name
+
+const routes: Routes = [
+    {
+      path: '',
+      component: DashboardComponent
+    },
+    {
+      path: 'edit-user/:id',
+      component: EditUserComponent
+    },
+];
+
+@NgModule({
+  declarations: [
+    DashboardComponent,
+    EditUserComponent
+  ],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    FormsModule,
+    SharedModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatIconModule,
+    MatSidenavModule,
+    MatListModule,
+    MatInputModule,
+    MatBadgeModule,
+    RouterModule.forChild(routes),
+  ],
+  exports: [RouterModule] 
+  
+})
+export class ManagerModule { }
+

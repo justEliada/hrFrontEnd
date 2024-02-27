@@ -52,11 +52,9 @@ export class AuthServiceService {
     return this.http.post<User>(`${this.baseUrl}/add`, user)
       .pipe(
         map(user => {
-          localStorage.setItem('currentUser', JSON.stringify(user));
-          this.setAuthentication(true);
           return user;
         }),
-        catchError(error => throwError(() => new Error('Signup failed: ' + error.message)))
+        catchError(error => throwError(() => new Error(error.error)))
       );
   }
 

@@ -69,15 +69,6 @@ export class DashboardComponent implements OnInit {
     );
   }
 
-  // filterUsersByLeastCreatedTimeSheet(): void {
-  //   this.userService.getUsersByLeastCreatedTimeSheet().subscribe({
-  //     next: (filteredUsers) => {
-  //       this.users = filteredUsers;
-  //     },
-  //     error: (e) => console.error(e)
-  //   });
-  // }
-
   toggleFilter(): void {
     if (this.isFilterApplied) {
       this.loadAllUsers();

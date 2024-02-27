@@ -18,8 +18,6 @@
           <td>{{ user.firstName }} {{ user.lastName }}</td>
           <td>{{ user.username }}</td>
           <td>
-            <!-- <button class="edit-button" (click)="editUser(user.id)">EDIT</button> -->
-            <!-- <button class="edit-button" [ngStyle]="{'background-color': user.hasPendingVacation ? 'yellow' : '#A3D2CA'}" (click)="editUser(user.id)">EDIT</button> -->
             <button mat-raised-button
               class="edit-button"
               [ngStyle]="{'background-color': '#A3D2CA', color: 'black'}"
@@ -29,7 +27,6 @@
               matBadgePosition="above before">
               EDIT
             </button>
-            <!-- <button class="delete-button" (click)="deleteUser(user.id)">DELETE</button> -->
             <button mat-raised-button
               class="delete-button"
               [ngStyle]="{'background-color': '#ED6663', color: 'black'}"

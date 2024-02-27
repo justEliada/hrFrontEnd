@@ -16,6 +16,7 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { SharedModule } from './shared.module';
+import { LayoutModule } from '@angular/cdk/layout';
 
 
 
@@ -24,22 +25,13 @@ import { SharedModule } from './shared.module';
 @NgModule({
   declarations: [
     AppComponent,
-    // LoginComponent,
-    // SignupComponent,
-    // DashboardComponent,
-    // TopBarComponent,
-    // SideBarComponent,
-    // EditUserComponent,
-    // CalendarComponent,
-    // ToastComponent,
-    // ModalComponent,
-    // CalendarModalComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     NgbModule,
+    LayoutModule,
     ReactiveFormsModule,
     MatToolbarModule,
     MatButtonModule,

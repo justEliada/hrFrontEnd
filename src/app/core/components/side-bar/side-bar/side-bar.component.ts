@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthServiceService } from 'src/app/core/services/auth-service.service';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { Observable, map } from 'rxjs';
+
 
 @Component({
   selector: 'app-side-bar',
@@ -10,8 +13,11 @@ import { AuthServiceService } from 'src/app/core/services/auth-service.service';
 export class SideBarComponent implements OnInit {
   userName: string = 'Hello';
   userRole: string = 'Default Role';
-
-  constructor(private authService: AuthServiceService, private router: Router) { }
+  
+  constructor(
+     private authService: AuthServiceService,
+     private router: Router, 
+     private breakpointObserver: BreakpointObserver) { }
 
   ngOnInit() {
     this.loadUserInfo();

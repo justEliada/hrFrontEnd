@@ -30,7 +30,7 @@ export class AuthServiceService {
         catchError(error => {
           localStorage.removeItem('currentUser');
           this.setAuthentication(false);
-          return throwError(() => new Error('Login failed: ' + error.message));
+          return throwError(() => new Error(error.error));
         })
       );
   }

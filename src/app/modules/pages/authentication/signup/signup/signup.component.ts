@@ -38,7 +38,6 @@ export class SignupComponent implements OnInit {
           this.router.navigate(['']);
         },
         error: (error) => {
-          console.log('Signup error', error);
           this.toastService.show(
             `${error || 'Error submitting signup request'}`,
             'error'

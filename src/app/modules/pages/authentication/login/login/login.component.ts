@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthServiceService } from 'src/app/core/services/auth-service.service';
+import { ToastService } from 'src/app/core/services/toast.service';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +15,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder, 
     private router: Router, 
-    private authService: AuthServiceService) { }
+    private authService: AuthServiceService,
+    private toastService: ToastService) { }
 
 
   ngOnInit(): void {
@@ -50,7 +52,10 @@ export class LoginComponent implements OnInit {
             }
           },
           error: (error: any) => {
-            console.error('Login failed', error);
+            this.toastService.show(
+              `${error || 'Error submitting signup request'}`,
+              'error'
+            );
             this.authService.setAuthentication(false);
           }
         });

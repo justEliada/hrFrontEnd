@@ -25,7 +25,7 @@
   }
 
   button {
-    background-color: #5EAAA8;
+    background-color: #71ABDF;
     color: white;
     padding: 15px 20px;
     border: none;
@@ -34,7 +34,7 @@
   }
 
   button:hover {
-    background-color: #498e8c;
+    background-color: #71ABDF;
   }
 }
 
@@ -138,10 +138,10 @@
         border-radius: 4px;
         font-weight: bold;
         &.approved {
-          background-color: #5EAAA8;
+          background-color: #71ABDF;
           color: white;
           &:hover{
-            background-color: #4a8790;
+            background-color: #5786af;
   
           }
         }
@@ -186,18 +186,18 @@
     }
 
     .save-button {
-      background-color: #5EAAA8;
+      background-color: #71ABDF;
       color: white;
 
       &:hover {
-        background-color: #498e8c;
+        background-color: #5786af;
       }
     }
     .cancel-button {
-      background-color: #fc9056;
+      background-color: #0A2C66;
       color: white;
       &:hover {
-        background-color: #fb7c37;
+        background-color: #020a16;
       }
     }
   }
@@ -207,7 +207,7 @@
   padding: 1rem;
   border-radius: 0.5rem;
   margin: 20px 0;
-  background-color: #A3D2CA;
+  background-color: #E0EDFF;
   
   button{
       margin: 0 10px;

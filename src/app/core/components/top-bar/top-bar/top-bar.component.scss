@@ -4,7 +4,7 @@
   height: 70px;
   align-items: center;
   padding: 0.5rem 1rem;
-  background-color: #ffffff;
+  background-color: #0A2C66;
   box-shadow: 0 2px 4px 0 #0000001a;
 
   .logo-container {
@@ -27,7 +27,7 @@
       outline: none;
 
       &:focus {
-        border-color: #007bff;
+        border-color: #71ABDF;
       }
     }
 
@@ -35,7 +35,7 @@
       padding: 0.5rem;
       border: none;
       border-radius: 10px;
-      background-color: #007bff;
+      background-color: #71ABDF;
       color: white;
       cursor: pointer;
     }

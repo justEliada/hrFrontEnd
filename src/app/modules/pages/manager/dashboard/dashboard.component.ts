@@ -17,7 +17,6 @@ export class DashboardComponent implements OnInit {
   users: ExtendedUserResponseDto[] = [];
   allUsers: ExtendedUserResponseDto[] = [];
 
-  @Input() searchText: string = '';
   constructor(
     private userService: UserService,
     private router: Router,
